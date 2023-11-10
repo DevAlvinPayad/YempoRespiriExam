@@ -13,12 +13,17 @@ namespace YempoRespiriExam.Data
 
         public void Seed()
         {
-            Guid newId = Guid.Parse("eb851051-7484-4321-8a39-eaabedee59fd");
-            DateTime birthDate = DateTime.Parse("1995-05-05");
-            var person = new Person { Id = newId, FirstName = "Luffy", MiddleName = "D", LastName = "Monkey", BirthDate = birthDate, Gender = "Male"};
+            //Create 2 initial data
+            for(int x = 1; x <= 2; x++) 
+            {
+                Guid newId = Guid.NewGuid();
+                DateTime birthDate = DateTime.Parse("1995-05-05");
+                var person = new Person { Id = newId, FirstName = string.Format("Test-{0}",x), MiddleName = string.Format("T-{0}", x), LastName = string.Format("Person-{0}", x), BirthDate = birthDate.AddYears(x), Gender = "Male" };
 
-            dataContext.Add(person);
-            dataContext.SaveChanges();
+                dataContext.Add(person);
+                dataContext.SaveChanges();
+            }
+            
         }
     }
 }
